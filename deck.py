@@ -11,7 +11,7 @@ class Deck:
     def __init__(self, deck):
         self.deck = deck
 
-    def card_verif(self):
+    def cards_verif(self):
         """
         blablabla
         """
@@ -25,7 +25,7 @@ class Deck:
         for card in self.deck:
             if card in normal_deck:
                 normal_deck.remove(card)
-                if normal_deck == []:
+                if not normal_deck:
                     print("Le deck est complet!")
             else:
                 raise CardNotValidError(f"{card} n'est pas une carte valide.")
@@ -34,15 +34,15 @@ class Deck:
                 raise DeckIncompleteError(f"Il manque la / les carte(s)"
                                           f"suivante(s): {normal_deck}")
 
+# if "__main__" == __name__:
+#     my_deck = []
+#     cards = input("Entrez les cartes: ")
+#     cards = cards.upper()
+#     cards_list = cards.split(", ")
 
-if "__main__" == __name__:
-    my_deck = []
-    cards = input("Entrez les cartes: ")
-    cards = cards.upper()
-    cards_list = cards.split(", ")
+#     for card in cards_list:
+#         my_deck.append(card)
 
-    for card in cards_list:
-        my_deck.append(card)
-
-    args = Deck(my_deck)
-    args.card_verif()
+#     args = Deck(my_deck)
+#     args.card_verif()
+#     tri = TriPeaks()
