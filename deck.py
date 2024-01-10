@@ -7,9 +7,13 @@ from exceptions import DeckError, CardNotValidError, DeckIncompleteError
 class Deck:
     """"
     This class is used to verify if the deck given is valid.
+    It also create the board, waste and stock pile of the game.
     """
     def __init__(self, deck):
         self.deck = deck
+        self.board = []
+        self.waste = []
+        self.stock = []
 
     def cards_verif(self):
         """
@@ -36,3 +40,41 @@ class Deck:
 
         if norm_d:
             raise DeckIncompleteError(f"Missing the following card(s): {norm_d}")
+
+    def board_pile(self):
+        """"
+        A method to create the cards pile on the board with index of each card for each row.
+        """
+        board_cards = self.deck[0:28]
+        rows = [board_cards[0:3], board_cards[3:9], board_cards[9:18], board_cards[18:28]]
+        rows.reverse()
+        index = 0
+
+        for num, row in enumerate(rows):
+            if index == 0:
+                index += 1
+            elif index == 2:
+                index += 0
+            else:
+                index += num
+            for card in row:
+                index_card = (card, index)
+                self.board.append(index_card)
+            index += 1
+
+        return self.board
+
+    def waste_pile(self):
+        """"
+        A method that create the waste pile of the game.
+        """
+        self.waste.append(self.deck[28])
+        return self.waste
+
+    
+    def stock_pile(self):
+        """"
+        A method that create the stock pile of the game.
+        """
+        self.stock = self.deck[29:52]
+        return self.stock
